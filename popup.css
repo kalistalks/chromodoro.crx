@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Geist Regular';
+    src: url('Geist-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Eksell';
+    src: url('ekselldisplaytrial-medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Geist Regular";
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+}
+
+#timer {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+button {
+    margin: 5px;
+    display: inline;
+}
+
+.title {
+    font-family: "Eksell";
+    /* display: inline-flexbox; */
+}
+
+.center {
+    text-align: center;
+    display: inline-flexbox;
+}
