@@ -34,8 +34,10 @@ body {
     outline-offset: 2px;
 }
 
-.title {
-    margin: 0;
+
+.form-control:focus {
+    outline: 3px solid #000000;
+    /* outline-offset: 1px; */
 }
 
 .title-container {

@@ -29,7 +29,22 @@
       <button id="reset" class="btn btn-dark mb-1">Reset Timer</button>
     </div>
 
-    <div id="task-container"></div>
+    <div id="task-container">
+        <h4 style="margin-top: 5px;">To Do List</h4>
+    </div>
+    <div id="todo-form" class="d-flex justify-content-center align-items-center mb-3">
+      <input type="text" class="form-control me-2" name="input-box" id="input-box" style='display: inline-block;' placeholder="Add task"/>
+      <button class="btn btn-dark" id="input-button" onclick="addTask()" style="display:inline-block">Add</button>
+    </div>
+    <h4>Task List</h4>
+    <ul id="list-container"></ul>
+    <hr>
+    <div class="counter-container">
+      <div id="task-counters" style="margin-bottom: 5px;">
+        Completed: <span id="completed-counter">0</span> | Uncompleted:
+        <span id="uncompleted-counter">0</span>
+      </div>
+    </div>
   </div>
 
   <script src="popup.js"></script>
