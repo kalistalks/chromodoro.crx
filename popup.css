@@ -14,27 +14,33 @@
 
 body {
     font-family: "Geist Regular";
-    width: 200px;
-    padding: 10px;
+    background-color: #f9f8eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
     text-align: center;
 }
 
 #timer {
     font-size: 2em;
-    margin-bottom: 20px;
+    /* margin-top: 5px; */
+    margin-bottom: 10px;
 }
 
-button {
-    margin: 5px;
-    display: inline;
+.btn:focus {
+    outline: 3px solid #000000; /* Black outline on focus */
+    outline-offset: 2px;
 }
 
 .title {
-    font-family: "Eksell";
-    /* display: inline-flexbox; */
+    margin: 0;
 }
 
-.center {
-    text-align: center;
-    display: inline-flexbox;
+.title-container {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
