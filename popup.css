@@ -34,12 +34,6 @@ body {
     outline-offset: 2px;
 }
 
-
-.form-control:focus {
-    outline: 3px solid #000000;
-    /* outline-offset: 1px; */
-}
-
 .title-container {
     white-space: nowrap;
     display: flex;
