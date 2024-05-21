@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", function() {
         inputBox.value = "";
 
         const checkbox = li.querySelector("input");
-        const editBtn = li.querySelector(".edit-btn");
+        const editBtn = li.querySelector(".edit-button");
         const taskSpan = li.querySelector("span");
-        const deleteBtn = li.querySelector(".delete-btn");  
+        const deleteBtn = li.querySelector(".delete-button");  
           
         checkbox.addEventListener("click", function () {
             if (checkbox.checked) {
@@ -38,5 +38,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 taskSpan.style.color = "black";
             }
         });
-    }  
+        
+        editBtn.addEventListener("click", function () {
+            const update = prompt("Enter new task", task);
+            if (update) { 
+                taskSpan.textContent = update;
+                taskSpan.style.textDecoration = "none";
+                taskSpan.style.color = "black";
+                checkbox.checked = false;
+                li.classList.remove("completed");
+            }
+        });
+
+        deleteBtn.addEventListener("click", function () {
+            listContainer.removeChild(li);
+        });
+    }
 });
