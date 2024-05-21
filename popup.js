@@ -4,6 +4,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const inputButton = document.getElementById("input-button");
 
     inputButton.addEventListener("click", addTask);
+    const completedCounter = document.getElementById("completed-counter");
+    const uncompletedCounter = document.getElementById("uncompleted-counter");
+
+    function updateCounter() {
+        const completedTasks = document.querySelectorAll("li.completed").length;
+        const uncompletedTasks = document.querySelectorAll("li:not(.completed)").length;
+        completedCounter.textContent = completedTasks;
+        uncompletedCounter.textContent = uncompletedTasks;
+    }
 
     function addTask() {
         const task = inputBox.value.trim();
@@ -22,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         listContainer.appendChild(li);
         inputBox.value = "";
+        updateCounter();
 
         const checkbox = li.querySelector("input");
         const editBtn = li.querySelector(".edit-button");
@@ -29,14 +39,18 @@ document.addEventListener("DOMContentLoaded", function() {
         const deleteBtn = li.querySelector(".delete-button");  
           
         checkbox.addEventListener("click", function () {
+            li.classList.toggle("completed", checkbox.checked);
             if (checkbox.checked) {
                 taskSpan.style.textDecoration = "line-through";
                 taskSpan.style.color = "grey";
+                updateCounter();   
             }
             else {
                 taskSpan.style.textDecoration = "none";
                 taskSpan.style.color = "black";
+                updateCounter();
             }
+            updateCounter();
         });
         
         editBtn.addEventListener("click", function () {
@@ -47,11 +61,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 taskSpan.style.color = "black";
                 checkbox.checked = false;
                 li.classList.remove("completed");
+                updateCounter();
             }
         });
 
         deleteBtn.addEventListener("click", function () {
-            listContainer.removeChild(li);
+            if (confirm("Are you sure you want to delete this task?")) {
+                // listContainer.removeChild(li);
+                li.remove();
+                updateCounter();
+            }
+            
         });
     }
 });
