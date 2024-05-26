@@ -47,13 +47,14 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         const li = document.createElement("li");
-        li.innerHTML = `
-            <label class="me-4">
-                <input type="checkbox" class="task-checkbox">
+        li.innerHTML = `<div class="form-check">
+            <label class="form-check-label me-4">
+                <input type="checkbox" class=""form-check-input"">
                 <span style="text-decoration: ${textDecoration}; color: ${color}">${task}</span>
             </label>
             <button class="btn edit-button"><img src="images/edit.svg" alt="edit"></button>
             <button class="btn delete-button"><img src="images/trash.svg" alt="delete"></button>
+            </div>
             `;
         
         listContainer.appendChild(li);
