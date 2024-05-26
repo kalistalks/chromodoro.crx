@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
             if (data.tasks) {
                 data.tasks.forEach(task => {
                     addTask(task.text, task.completed, task.textDecoration, task.color);
-                })
+                });
+                updateCounter();
             }
         });
     }
@@ -85,11 +86,11 @@ document.addEventListener("DOMContentLoaded", function() {
             const update = prompt("Enter new task", task);
             if (update) { 
                 taskSpan.textContent = update;
-                taskSpan.style.textDecoration = "none";
-                taskSpan.style.color = "black";
-                checkbox.checked = false;
+                // taskSpan.style.textDecoration = "none";
+                // taskSpan.style.color = "black";
+                // checkbox.checked = false;
                 li.classList.remove("completed");
-                updateCounter();
+                // updateCounter();
                 saveTasks();
             }
         });
@@ -97,8 +98,8 @@ document.addEventListener("DOMContentLoaded", function() {
         deleteBtn.addEventListener("click", function () {
             if (confirm("Are you sure you want to delete this task?")) {
                 li.remove();
-                updateCounter();
                 saveTasks();
+                updateCounter();
             }
             
         });
