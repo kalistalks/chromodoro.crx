@@ -12,15 +12,15 @@ document.addEventListener("DOMContentLoaded", function() {
         chrome.storage.local.get("tasks", data => {
             if (data.tasks) {
                 data.tasks.forEach(task => {
-                    addTask(task.text, task.completed);
+                    addTask(task.text, task.completed, task.textDecoration, task.color);
                 })
             }
         });
     }
 
     function updateCounter() {
-        const completedTasks = document.querySelectorAll("li.completed").length;
-        const uncompletedTasks = document.querySelectorAll("li:not(.completed)").length;
+        const completedTasks = listContainer.querySelectorAll("li.completed").length;
+        const uncompletedTasks = listContainer.querySelectorAll("li:not(.completed)").length;
         completedCounter.textContent = completedTasks;
         uncompletedCounter.textContent = uncompletedTasks;
     }
@@ -30,14 +30,16 @@ document.addEventListener("DOMContentLoaded", function() {
         listContainer.querySelectorAll("li").forEach(li => {
             const task = {
                 text: li.querySelector("span").textContent,
-                completed: li.classList.contains("completed")
+                completed: li.classList.contains("completed"),
+                textDecoration: li.querySelector("span").style.textDecoration,
+                color: li.querySelector("span").style.color
         };
             tasks.push(task);
         });
         chrome.storage.local.set({tasks}, () => updateCounter());   
     }
 
-    function addTask(task, completed=false) {
+    function addTask(task, completed=false, textDecoration="none", color="black") {
         task = task || inputBox.value.trim();
         if (!task) {
             alert("Please enter a task");
@@ -46,11 +48,12 @@ document.addEventListener("DOMContentLoaded", function() {
         const li = document.createElement("li");
         li.innerHTML = `
             <label class="me-4">
-                <input type="checkbox" class="task-checkbox" ${completed ? "checked" : ""}>
-                <span>${task}</span>
+                <input type="checkbox" class="task-checkbox">
+                <span style="text-decoration: ${textDecoration}; color: ${color}">${task}</span>
             </label>
             <button class="btn edit-button"><img src="images/edit.svg" alt="edit"></button>
-            <button class="btn delete-button"><img src="images/trash.svg" alt="delete"></button>`;
+            <button class="btn delete-button"><img src="images/trash.svg" alt="delete"></button>
+            `;
         
         listContainer.appendChild(li);
         inputBox.value = "";
@@ -61,8 +64,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const editBtn = li.querySelector(".edit-button");
         const taskSpan = li.querySelector("span");
         const deleteBtn = li.querySelector(".delete-button");  
+
+        checkbox.checked = completed;
           
-        checkbox.addEventListener("click", function () {
+        checkbox.addEventListener("change", function () {
             li.classList.toggle("completed", checkbox.checked);
             if (checkbox.checked) {
                 taskSpan.style.textDecoration = "line-through";
@@ -72,8 +77,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 taskSpan.style.textDecoration = "none";
                 taskSpan.style.color = "black";
             }
-            updateCounter();
             saveTasks();
+            updateCounter();
         });
         
         editBtn.addEventListener("click", function () {
