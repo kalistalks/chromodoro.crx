@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", function() {
+
+    const toggleSwitch = document.getElementById("toggle-switch");
+    const timer = document.getElementById("timer");
+
+    toggleSwitch.addEventListener("change", function() {
+        if (toggleSwitch.checked) {
+            timer.innerHTML = "05:00";
+        } else {
+            timer.innerHTML = "25:00";
+        }
+    });
+
     const inputBox = document.getElementById("input-box");
     const listContainer = document.getElementById("list-container");
     const inputButton = document.getElementById("input-button");
@@ -107,4 +119,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (isNew) saveTasks();
     }
+    document.getElementById('start').addEventListener('click', () => {
+        // chrome.runtime.sendMessage({ command: 'start' });
+        console.log("Start button clicked");
+        document.getElementById('reset').disabled = false; // Enable the "Reset" button
+    }); 
 });
