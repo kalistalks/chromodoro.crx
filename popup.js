@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         const li = document.createElement("li");
-        li.innerHTML = `<div class="form-check">
+        li.innerHTML = `<div class="form-check custom-checkbox">
             <label class="form-check-label me-4">
                 <input type="checkbox" class="form-check-input">
                 <span style="text-decoration: ${textDecoration}; color: ${color}">${taskText}</span>

@@ -47,3 +47,22 @@ body {
     justify-content: center;
     list-style-type: none;
 }
+
+/* Custom checkbox styles */
+.custom-checkbox .form-check-input {
+    border: 2px solid #28a745;
+}
+  
+.custom-checkbox .form-check-input:checked {
+    background-color: #28a745;
+}
+  
+.custom-checkbox .form-check-input:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+}
+  
+.custom-checkbox .form-check-input:checked ~ .form-check-label::before {
+    background-color: #28a745;
+    border-color: #28a745;
+}  
