@@ -59,134 +59,132 @@ body {
     border-color: #28a745;
 }  
 
+.toggleSwitch span span {
+	display: none;
+}  
+  
 .toggleSwitch {
-    display: inline-block;
-    height: 34px;
-    position: relative;
-    overflow: visible;
-    padding: 0;
-    cursor: pointer;
-    width: 100%; /* Use 100% width to span the whole container */
-    background-color: #fafafa;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+	display: inline-block;
+	height: 18px;
+	position: relative;
+	overflow: visible;
+	padding: 0;
+	cursor: pointer;
+	width: 100%;
+	background-color: #fafafa;
+	border: 1px solid #6C757D;
+	border-radius:5px;
+	height:34px;
 }
-
 .toggleSwitch * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
-
 .toggleSwitch label,
 .toggleSwitch > span {
-    line-height: 20px;
-    height: 20px;
-    vertical-align: middle;
+	line-height: 20px;
+	height: 20px;
+	vertical-align: middle;
 }
-
 .toggleSwitch input:focus ~ a,
 .toggleSwitch input:focus + label {
-    outline: none;
+	outline: none;
 }
-
 .toggleSwitch label {
-    position: relative;
-    z-index: 3;
-    display: block;
-    width: 100%;
+	position: relative;
+	z-index: 3;
+	display: block;
+	width: 100%;
 }
-
 .toggleSwitch input {
-    position: absolute;
-    opacity: 0;
-    z-index: 5;
+	position: absolute;
+	opacity: 0;
+	z-index: 5;
 }
-
 .toggleSwitch > span {
-    position: absolute;
-    left: 0;
-    width: 100%; /* Use 100% width to span the whole container */
-    margin: 0;
-    text-align: left;
-    white-space: nowrap;
-    margin: 0 3px;
+	position: absolute;
+	left: 0;
+	width: calc(100% - 6px);
+	margin: 0;
+	text-align: left;
+	white-space: nowrap;
+  margin:0 3px;
 }
-
 .toggleSwitch > span span {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    display: block;
-    width: 50%;
-    margin-left: 50px;
-    text-align: left;
-    font-size: 0.9em;
-    left: 0;
-    top: -1px;
-    opacity: 1;
-    text-align: center;
-    line-height: 34px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	display: block;
+	width: 50%;
+	margin-left: 50px;
+	text-align: left;
+	font-size: 0.9em;
+	width: auto;
+	left: 0;
+	top: -1px;
+	opacity: 1;
+	width:40%;
+	text-align: center;
+  line-height:34px;
 }
-
 .toggleSwitch a {
-    position: absolute;
-    right: 50%;
-    z-index: 4;
-    display: block;
-    top: 3px;
-    bottom: 3px;
-    left: 3px;
-    width: calc(50% - 6px); /* Adjust width to fit the toggle switch */
-    background-color: #6C757D;
-    border-radius: 4px;
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+	position: absolute;
+	right: 50%;
+	z-index: 4;
+	display: block;
+	top: 3px;
+	bottom: 3px;
+	padding: 0;
+	left: 3px;
+	width: 50%;
+	background-color: #6C757D;
+	border-radius: 4px;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-
 .toggleSwitch > span span:first-of-type {
-    color: #FFFFFF;
-    opacity: 1;
-    left: 0;
-    margin: 0;
+	color: #FFFFFF;
+	opacity: 1;
+	left: 0;
+	margin: 0;
     width: 50%;
 }
-
 .toggleSwitch > span span:last-of-type {
-    left: auto;
-    right: 0;
-    color: #6C757D;
-    margin: 0;
+	left:auto;
+	right:0;
+	color: #6C757D;
+	margin: 0;
     width: 50%;
 }
-
 .toggleSwitch > span:before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: -2px;
-    border-radius: 30px;
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: -2px;
+	/* background-color: #fafafa;
+	border: 1px solid #ccc; */
+	border-radius: 30px;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
 }
-
 .toggleSwitch input:checked ~ a {
-    left: calc(50% - 3px);
+	left: calc(50% - 3px);
 }
 
 .toggleSwitch input:checked ~ span span:first-of-type {
-    left: 0;
-    color: #6C757D;
+	left:0;
+	color:#6C757D;
 }
-
 .toggleSwitch input:checked ~ span span:last-of-type {
-    opacity: 1;
-    color: #FFFFFF;
+	/* opacity: 1;
+	color: #fff;	 */
+	color:#FFFFFF;
 }
