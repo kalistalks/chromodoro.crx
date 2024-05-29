@@ -122,16 +122,19 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('start').addEventListener('click', () => {
         // chrome.runtime.sendMessage({ command: 'start' });
         console.log("Start button clicked");
-        // document.getElementById('reset').disabled = false; // Enable the "Reset" button
+        document.getElementById('stop').removeAttribute("disabled");
+        document.getElementById('reset').removeAttribute("disabled");
     }); 
 
     document.getElementById('stop').addEventListener('click', () => {
-        // chrome.runtime.sendMessage({ command: 'start' });
+        // chrome.runtime.sendMessage({ command: 'stop' });
         console.log("Stop button clicked");
     }); 
 
     document.getElementById('reset').addEventListener('click', () => {
-        // chrome.runtime.sendMessage({ command: 'start' });
+        // chrome.runtime.sendMessage({ command: 'reset' });
         console.log("Reset button clicked");
+        document.getElementById('stop').setAttribute("disabled", true);
+        document.getElementById('reset').setAttribute("disabled", true);
     }); 
 });
