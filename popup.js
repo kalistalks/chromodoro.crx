@@ -122,6 +122,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('start').addEventListener('click', () => {
         // chrome.runtime.sendMessage({ command: 'start' });
         console.log("Start button clicked");
-        document.getElementById('reset').disabled = false; // Enable the "Reset" button
+        // document.getElementById('reset').disabled = false; // Enable the "Reset" button
+    }); 
+
+    document.getElementById('stop').addEventListener('click', () => {
+        // chrome.runtime.sendMessage({ command: 'start' });
+        console.log("Stop button clicked");
+    }); 
+
+    document.getElementById('reset').addEventListener('click', () => {
+        // chrome.runtime.sendMessage({ command: 'start' });
+        console.log("Reset button clicked");
     }); 
 });
