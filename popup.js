@@ -119,21 +119,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (isNew) saveTasks();
     }
-    document.getElementById('start').addEventListener('click', () => {
-        // chrome.runtime.sendMessage({message: 'start'});
-        console.log("Start button clicked");
-        document.getElementById('stop').removeAttribute("disabled");
-        document.getElementById('reset').removeAttribute("disabled");
-    }); 
+
+    const startButton = document.getElementById("start");
+    const stopButton = document.getElementById("stop");
+    const resetButton = document.getElementById("reset");
+
+    startButton.addEventListener("click", () => {
+        chrome.storage.local.set({isRunning: true});
+        startButton.disabled = true;
+        stopButton.removeAttribute("disabled");
+        resetButton.removeAttribute("disabled");
+    });
 
     document.getElementById('stop').addEventListener('click', () => {
         // chrome.runtime.sendMessage({message: 'stop'});
         console.log("Stop button clicked");
+        startButton.removeAttribute("disabled");
     }); 
 
-    document.getElementById('reset').addEventListener('click', () => {
+    resetButton.addEventListener('click', () => {
         // chrome.runtime.sendMessage({message: 'reset'});
-        console.log("Reset button clicked");
+        chrome.storage.local.set({timer: 0, isRunning: false});
         document.getElementById('stop').setAttribute("disabled", true);
         document.getElementById('reset').setAttribute("disabled", true);
     }); 
