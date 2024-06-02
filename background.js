@@ -1,3 +1,13 @@
+chrome.alarms.create("pomodoroTimer", {
+  periodInMinutes: 1 / 60, 
+})
+
+chrome.alarm.onAlarm.addListener((alarm) => {
+  if (alarm.name == "pomodoroTimer") { 
+  
+  }
+})
+
 let countdown;
 let time = 25 * 60;
 
