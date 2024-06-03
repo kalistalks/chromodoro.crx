@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     const toggleSwitch = document.getElementById("toggle-switch");
-    const time = document.getElementById("time");
+    const timerDisplay = document.getElementById("time");
 
     toggleSwitch.addEventListener("change", function() {
         if (toggleSwitch.checked) {
-            time.innerHTML = "05:00";
+            timerDisplay.innerHTML = "05:00";
         } else {
-            time.innerHTML = "25:00";
+            timerDisplay.innerHTML = "25:00";
         }
     });
 
@@ -17,13 +17,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const completedCounter = document.getElementById("completed-counter");
     const uncompletedCounter = document.getElementById("uncompleted-counter");
 
-    // Add event listener to the add button
     inputButton.addEventListener("click", () => addTask());
 
-    // Load existing tasks from storage
-    loadTasks();   
+    loadTasks();
 
-    function loadTasks() { 
+    function loadTasks() {
         chrome.storage.local.get("tasks", data => {
             if (data.tasks) {
                 data.tasks.forEach(task => {
@@ -41,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
         uncompletedCounter.textContent = uncompletedTasks;
     }
 
-    function saveTasks() { 
+    function saveTasks() {
         const tasks = [];
         listContainer.querySelectorAll("li").forEach(li => {
             const task = {
@@ -52,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
             };
             tasks.push(task);
         });
-        chrome.storage.local.set({ tasks }, () => updateCounter());   
+        chrome.storage.local.set({ tasks }, () => updateCounter());
     }
 
     function addTask(text, completed = false, textDecoration = "none", color = "black", isNew = true) {
@@ -87,9 +85,8 @@ document.addEventListener("DOMContentLoaded", function() {
             li.classList.toggle("completed", checkbox.checked);
             if (checkbox.checked) {
                 taskSpan.style.textDecoration = "line-through";
-                taskSpan.style.color = "grey";  
-            }
-            else {
+                taskSpan.style.color = "grey";
+            } else {
                 taskSpan.style.textDecoration = "none";
                 taskSpan.style.color = "black";
             }
@@ -131,38 +128,34 @@ document.addEventListener("DOMContentLoaded", function() {
         resetButton.removeAttribute("disabled");
     });
 
-    document.getElementById('stop').addEventListener('click', () => {
-        // chrome.runtime.sendMessage({message: 'stop'});
-        console.log("Stop button clicked");
+    stopButton.addEventListener("click", () => {
         startButton.removeAttribute("disabled");
-    }); 
+        stopButton.setAttribute("disabled", true);
+        resetButton.setAttribute("disabled", true);
+    });
 
-    resetButton.addEventListener('click', () => {
-        // chrome.runtime.sendMessage({message: 'reset'});
+    resetButton.addEventListener("click", () => {
         chrome.storage.local.set({timer: 0, isRunning: false});
-        document.getElementById('stop').setAttribute("disabled", true);
-        document.getElementById('reset').setAttribute("disabled", true);
-    }); 
+        stopButton.setAttribute("disabled", true);
+        resetButton.setAttribute("disabled", true);
+        timerDisplay.innerHTML = toggleSwitch.checked ? "05:00" : "25:00";
+    });
 
-    chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         if (message.timer) {
-            document.getElementById('time').textContent = message.timer;
+            timerDisplay.textContent = message.timer;
         }
     });
 
     function updateTime() {
         chrome.storage.local.get("timer", data => {
-            const time = document.getElementById("time");
-            let html_time = time.innerHTML;
-            const minutes = html_time - Math.ceil(data.timer / 60); 
-            let seconds = 0;
-            if (data.timer % 60 === 0) {
-                seconds = 0;
-            } else {
-                seconds = 60 - Math.ceil(data.timer % 60);
+            if (data.timer !== undefined) {
+                let totalSeconds = data.timer;
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+                timerDisplay.textContent = `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
             }
-            time.textContent = `${minutes < 10 ? "0"+ minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-        })
+        });
     }
 
     updateTime();
