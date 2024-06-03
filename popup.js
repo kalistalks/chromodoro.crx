@@ -3,11 +3,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const toggleSwitch = document.getElementById("toggle-switch");
     const timerDisplay = document.getElementById("time");
 
+    chrome.storage.local.get("initialTimerValue", (data) => {
+        if (data.initialTimerValue === undefined) {
+            chrome.storage.local.set({initialTimerValue: 25}, () => {
+                timerDisplay.innerHTML = "25:00";
+            });
+        } else {
+            timerDisplay.innerHTML = data.initialTimerValue === 5 ? "05:00" : "25:00";
+        }
+    });
+
     toggleSwitch.addEventListener("change", function() {
         if (toggleSwitch.checked) {
             timerDisplay.innerHTML = "05:00";
+            chrome.storage.local.set({initialTimerValue: 5})
         } else {
             timerDisplay.innerHTML = "25:00";
+            chrome.storage.local.set({initialTimerValue: 25})
         }
     });
 
@@ -50,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
             };
             tasks.push(task);
         });
-        chrome.storage.local.set({ tasks }, () => updateCounter());
+        chrome.storage.local.set({tasks}, () => updateCounter());
     }
 
     function addTask(text, completed = false, textDecoration = "none", color = "black", isNew = true) {
@@ -147,10 +159,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function updateTime() {
-        const timerDisplay = document.getElementById("time");
-        const time = Number(timerDisplay.innerHTML.split(":")[0]);
-        chrome.storage.local.get("timer", data => {
-            const minutes = time - Math.ceil(data.timer / 60); 
+        chrome.storage.local.get(["timer", "initialTimerValue"], data => {
+            const minutes = data.initialTimerValue - Math.ceil(data.timer / 60); 
             let seconds = 0;
             if (data.timer % 60 === 0) {
                 seconds = 0;
