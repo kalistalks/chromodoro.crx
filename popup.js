@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     const toggleSwitch = document.getElementById("toggle-switch");
-    const timer = document.getElementById("timer");
+    const time = document.getElementById("time");
 
     toggleSwitch.addEventListener("change", function() {
         if (toggleSwitch.checked) {
-            timer.innerHTML = "05:00";
+            time.innerHTML = "05:00";
         } else {
-            timer.innerHTML = "25:00";
+            time.innerHTML = "25:00";
         }
     });
 
@@ -146,7 +146,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
     chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         if (message.timer) {
-            document.getElementById('timer').textContent = message.timer;
+            document.getElementById('time').textContent = message.timer;
         }
     });
+
+    function updateTime() {
+        chrome.storage.local.get("timer", data => {
+            const time = document.getElementById("time");
+            let html_time = time.innerHTML;
+            const minutes = html_time - Math.ceil(data.timer / 60); 
+            let seconds = 0;
+            if (data.timer % 60 === 0) {
+                seconds = 0;
+            } else {
+                seconds = 60 - Math.ceil(data.timer % 60);
+            }
+            time.textContent = `${minutes < 10 ? "0"+ minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+        })
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
 });
