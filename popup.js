@@ -38,8 +38,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     inputButton.addEventListener("click", () => addTask());
 
-    loadTasks();
-
     function loadTasks() {
         chrome.storage.local.get("tasks", data => {
             if (data.tasks) {
@@ -50,6 +48,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+    loadTasks();
 
     function updateCounter() {
         const completedTasks = listContainer.querySelectorAll("li.completed").length;
@@ -142,20 +142,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     startButton.addEventListener("click", () => {
         chrome.storage.local.set({isRunning: true});
-        // startButton.disabled = true;
-        // stopButton.removeAttribute("disabled");
-        // resetButton.removeAttribute("disabled");
     });
 
     stopButton.addEventListener("click", () => {
-        // startButton.removeAttribute("disabled");
     });
 
     resetButton.addEventListener("click", () => {
         chrome.storage.local.set({timer: 0, isRunning: false});
-        // startButton.removeAttribute("disabled");
-        // stopButton.setAttribute("disabled", true);
-        // resetButton.setAttribute("disabled", true);
         timerDisplay.innerHTML = toggleSwitch.checked ? "05:00" : "25:00";
     });
 
