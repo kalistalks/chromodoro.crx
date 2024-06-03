@@ -3,15 +3,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const toggleSwitch = document.getElementById("toggle-switch");
     const timerDisplay = document.getElementById("time");
 
-    chrome.storage.local.get("initialTimerValue", (data) => {
-        if (data.initialTimerValue === undefined) {
-            chrome.storage.local.set({initialTimerValue: 25}, () => {
-                timerDisplay.innerHTML = "25:00";
+        function updateTimerDisplay() {
+            chrome.storage.local.get("initialTimerValue", (data) => {
+                const initialTimerValue = data.initialTimerValue || 25;
+                timerDisplay.innerHTML = initialTimerValue === 5 ? "05:00" : "25:00";
             });
-        } else {
-            timerDisplay.innerHTML = data.initialTimerValue === 5 ? "05:00" : "25:00";
         }
-    });
+
+        function updateToggleSwitchState() {
+            chrome.storage.local.get("initialTimerValue", (data) => {
+                const initialTimerValue = data.initialTimerValue || 25;
+                toggleSwitch.checked = initialTimerValue === 5;
+            });
+        }
+    
+        updateTimerDisplay();
+        updateToggleSwitchState();
 
     toggleSwitch.addEventListener("change", function() {
         if (toggleSwitch.checked) {
