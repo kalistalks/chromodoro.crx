@@ -165,6 +165,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    function updateProgressBar(timerValue, initialTimerValue) {
+        const progressBar = document.querySelector(".progress-bar");
+        const percentage = (timerValue / (initialTimerValue * 60)) * 100;
+        progressBar.style.width = `${percentage}%`;
+        progressBar.textContent = `${Math.round(percentage)}%`;
+    }    
+
     function updateTime() {
         chrome.storage.local.get(["timer", "initialTimerValue"], data => {
             const minutes = data.initialTimerValue - Math.ceil(data.timer / 60); 
@@ -175,6 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 seconds = 60 - Math.ceil(data.timer % 60);
             }
             timerDisplay.textContent = `${minutes < 10 ? "0"+ minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+            updateProgressBar(data.timer, data.initialTimerValue);
         });
     }
 
