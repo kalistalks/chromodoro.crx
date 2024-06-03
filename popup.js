@@ -123,21 +123,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     startButton.addEventListener("click", () => {
         chrome.storage.local.set({isRunning: true});
-        startButton.disabled = true;
-        stopButton.removeAttribute("disabled");
-        resetButton.removeAttribute("disabled");
+        // startButton.disabled = true;
+        // stopButton.removeAttribute("disabled");
+        // resetButton.removeAttribute("disabled");
     });
 
     stopButton.addEventListener("click", () => {
-        startButton.removeAttribute("disabled");
-        stopButton.setAttribute("disabled", true);
-        resetButton.setAttribute("disabled", true);
+        // startButton.removeAttribute("disabled");
     });
 
     resetButton.addEventListener("click", () => {
         chrome.storage.local.set({timer: 0, isRunning: false});
-        stopButton.setAttribute("disabled", true);
-        resetButton.setAttribute("disabled", true);
+        // startButton.removeAttribute("disabled");
+        // stopButton.setAttribute("disabled", true);
+        // resetButton.setAttribute("disabled", true);
         timerDisplay.innerHTML = toggleSwitch.checked ? "05:00" : "25:00";
     });
 
@@ -148,13 +147,17 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function updateTime() {
+        const timerDisplay = document.getElementById("time");
+        const time = Number(timerDisplay.innerHTML.split(":")[0]);
         chrome.storage.local.get("timer", data => {
-            if (data.timer !== undefined) {
-                let totalSeconds = data.timer;
-                const minutes = Math.floor(totalSeconds / 60);
-                const seconds = totalSeconds % 60;
-                timerDisplay.textContent = `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+            const minutes = time - Math.ceil(data.timer / 60); 
+            let seconds = 0;
+            if (data.timer % 60 === 0) {
+                seconds = 0;
+            } else {
+                seconds = 60 - Math.ceil(data.timer % 60);
             }
+            timerDisplay.textContent = `${minutes < 10 ? "0"+ minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
         });
     }
 
