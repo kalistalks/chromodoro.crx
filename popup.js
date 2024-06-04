@@ -145,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     stopButton.addEventListener("click", () => {
+        chrome.storage.local.set({isRunning: false});
     });
 
     resetButton.addEventListener("click", () => {
@@ -166,16 +167,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }    
 
     function updateTime() {
-        chrome.storage.local.get(["timer", "initialTimerValue"], data => {
-            const minutes = data.initialTimerValue - Math.ceil(data.timer / 60); 
-            let seconds = 0;
-            if (data.timer % 60 === 0) {
-                seconds = 0;
-            } else {
-                seconds = 60 - Math.ceil(data.timer % 60);
+        chrome.storage.local.get(["timer", "isRunning", "initialTimerValue"], data => {
+            if (data.isRunning){
+                const minutes = data.initialTimerValue - Math.ceil(data.timer / 60); 
+                let seconds = 0;
+                if (data.timer % 60 === 0) {
+                    seconds = 0;
+                } else {
+                    seconds = 60 - Math.ceil(data.timer % 60);
+                }
+                timerDisplay.textContent = `${minutes < 10 ? "0"+ minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+                updateProgressBar(data.timer, data.initialTimerValue);
             }
-            timerDisplay.textContent = `${minutes < 10 ? "0"+ minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-            updateProgressBar(data.timer, data.initialTimerValue);
         });
     }
 

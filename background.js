@@ -28,32 +28,3 @@ chrome.storage.local.get(["timer", "isRunning"], (result) => {
     isRunning : "isRunning" in result ? result.isRunning : false  // ternery operator
   })
 })
-
-// let countdown;
-// let time = 25 * 60;
-
-// chrome.runtime.onMessage.addListener(
-//     function(request, sender, sendResponse) {
-//       if (request.message === "start") {
-//         startTimer();
-//       }
-//       else if (request.message === "stop") {
-//         restartTimer();
-//       }
-//       else if (request.message == "stop") { 
-//         stopTimer();
-//       }
-//     }
-//   );
-
-//   function startTimer() {
-
-//   }
-
-//   function restartTimer() {
-
-//   } 
-
-//   function stopTimer() {
-    
-//   }
