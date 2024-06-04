@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Geist Regular';
+    src: url('Geist-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Geist Regular";
+    background-color: #f9f8eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+}
