@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const toggleSwitch = document.getElementById("toggle-switch");
     const timerDisplay = document.getElementById("time");
+    const progressBar = document.querySelector(".progress-bar");
 
         function updateTimerDisplay() {
             chrome.storage.local.get("initialTimerValue", (data) => {
@@ -151,20 +152,9 @@ document.addEventListener("DOMContentLoaded", function() {
     resetButton.addEventListener("click", () => {
         chrome.storage.local.set({timer: 0, isRunning: false});
         timerDisplay.innerHTML = toggleSwitch.checked ? "05:00" : "25:00";
+        progressBar.style.width = "0%"; 
+        progressBar.textContent = "0%";
     });
-
-    chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-        if (message.timer) {
-            timerDisplay.textContent = message.timer;
-        }
-    });
-
-    function updateProgressBar(timerValue, initialTimerValue) {
-        const progressBar = document.querySelector(".progress-bar");
-        const percentage = (timerValue / (initialTimerValue * 60)) * 100;
-        progressBar.style.width = `${percentage}%`;
-        progressBar.textContent = `${Math.round(percentage)}%`;
-    }    
 
     function updateTime() {
         chrome.storage.local.get(["timer", "isRunning", "initialTimerValue"], data => {
@@ -177,7 +167,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     seconds = 60 - Math.ceil(data.timer % 60);
                 }
                 timerDisplay.textContent = `${minutes < 10 ? "0"+ minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-                updateProgressBar(data.timer, data.initialTimerValue);
+                const percentage = (data.timer / (data.initialTimerValue * 60)) * 100;
+                progressBar.style.width = `${percentage}%`;
+                progressBar.textContent = `${Math.round(percentage)}%`;
             }
         });
     }
