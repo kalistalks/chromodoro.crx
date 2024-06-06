@@ -21,11 +21,6 @@ body {
     margin-bottom: 10px;
 }
 
-.btn:focus {
-    outline: 3px solid #000000; /* Black outline on focus */
-    outline-offset: 2px;
-}
-
 .title-container {
     white-space: nowrap;
     display: flex;

@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 <input type="checkbox" class="form-check-input">
                 <span style="text-decoration: ${textDecoration}; color: ${color}">${taskText}</span>
             </label>
-            <button class="btn edit-button"><img src="images/edit.svg" alt="edit"></button>
-            <button class="btn delete-button"><img src="images/trash.svg" alt="delete"></button>
+            <button class="btn edit-button"><img src="../images/edit.svg" alt="edit"></button>
+            <button class="btn delete-button"><img src="../images/trash.svg" alt="delete"></button>
         </div>`;
 
         listContainer.appendChild(li);
