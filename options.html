@@ -13,9 +13,17 @@
             <h1 class="title">Pomodoro Timer</h1>
             <img src="images/favicon-32x32.png" alt="Pomodoro Timer Icon" class="ms-2">
         </div>
+        Work timer in minutes (1-60)
         <div class="d-flex justify-content-center align-items-center mb-3">
-            <input  id="time-option" type="number" class="form-control me-2 focus-ring focus-ring-dark py-1 px-2 text-decoration-none border rounded-2" name="input-box" id="input-box" style='display: inline-block;' min="1" max="60" value="25"/>
-            <button id="save-button" class="btn btn-secondary" style="display:inline-block">Save</button>
+            
+            <input  id="work-option" type="number" class="form-control me-2 focus-ring focus-ring-dark py-1 px-2 text-decoration-none border rounded-2" name="input-box" id="input-box" style='display: inline-block;' min="1" max="60" value="25"/>
+            <button id="work-button" class="btn btn-secondary" style="display:inline-block">Save</button>
+        </div>            
+        Break timer in minutes (1-60)
+        <div class="d-flex justify-content-center align-items-center mb-3">
+
+            <input  id="break-option" type="number" class="form-control me-2 focus-ring focus-ring-dark py-1 px-2 text-decoration-none border rounded-2" name="input-box" id="input-box" style='display: inline-block;' min="1" max="60" value="5"/>
+            <button id="break-button" class="btn btn-secondary" style="display:inline-block">Save</button>
         </div>
     </div>
     
