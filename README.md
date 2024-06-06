@@ -43,7 +43,12 @@ git clone https://github.com/kalistalks/Pomodoro-Chrome-Extension.git
     - Take short breaks as prompted by the timer.
     
 4. Customize settings:
-    - Adjust the timer settings in the options page according to your preferences.    
+    - Adjust the timer settings in the options page according to your preferences.  
+
+### Possible future developments
+- Notification reminders for upcoming tasks and breaks.
+- Website white or blacklists
+- Dark mode theme option.
 
 ### License
 This project is licensed under the MIT License. See the LICENSE file for details.
