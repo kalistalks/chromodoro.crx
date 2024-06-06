@@ -4,31 +4,33 @@ document.addEventListener("DOMContentLoaded", function() {
     const timerDisplay = document.getElementById("time");
     const progressBar = document.querySelector(".progress-bar");
 
-        function updateTimerDisplay() {
-            chrome.storage.local.get("initialTimerValue", (data) => {
-                const initialTimerValue = data.initialTimerValue || 25;
-                timerDisplay.innerHTML = initialTimerValue === 5 ? "05:00" : "25:00";
-            });
-        }
+    function updateTimerDisplay() {
+        chrome.storage.local.get(["workOption", "breakOption", "toggleSwitch"], (data) => {
+            const value = data.toggleSwitch ? data.breakOption : data.workOption;
+            timerDisplay.innerHTML = `${value < 10 ? "0" + value : value}:00`;
+        });
+    }
 
-        function updateToggleSwitchState() {
-            chrome.storage.local.get("initialTimerValue", (data) => {
-                const initialTimerValue = data.initialTimerValue || 25;
-                toggleSwitch.checked = initialTimerValue === 5;
-            });
-        }
+    function updateToggleSwitchState() {
+        chrome.storage.local.get("toggleSwitch", (data) => {
+            toggleSwitch.checked = data.toggleSwitch || false;
+        });
+    }
     
-        updateTimerDisplay();
-        updateToggleSwitchState();
+    updateTimerDisplay();
+    updateToggleSwitchState();
 
     toggleSwitch.addEventListener("change", function() {
-        if (toggleSwitch.checked) {
-            timerDisplay.innerHTML = "05:00";
-            chrome.storage.local.set({initialTimerValue: 5})
-        } else {
-            timerDisplay.innerHTML = "25:00";
-            chrome.storage.local.set({initialTimerValue: 25})
-        }
+        chrome.storage.local.get(["workOption", "breakOption"], (data) => {
+            if (toggleSwitch.checked) {
+                timerDisplay.innerHTML = `${data.breakOption < 10 ? "0" + data.breakOption : data.breakOption}:00`;
+                chrome.storage.local.set({toggleSwitch: true});
+            }
+            else {
+                timerDisplay.innerHTML = `${data.workOption < 10 ? "0" + data.workOption : data.workOption}:00`;
+                chrome.storage.local.set({toggleSwitch: false});
+            }
+        });
     });
 
     const inputBox = document.getElementById("input-box");
@@ -151,15 +153,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     resetButton.addEventListener("click", () => {
         chrome.storage.local.set({timer: 0, isRunning: false});
-        timerDisplay.innerHTML = toggleSwitch.checked ? "05:00" : "25:00";
+        chrome.storage.local.get(["workOption", "breakOption"], data => {
+            timerDisplay.innerHTML = toggleSwitch.checked ? `${data.breakOption < 10 ? "0" + data.breakOption : data.breakOption}:00` : `${data.workOption < 10 ? "0" + data.workOption : data.workOption}:00`;
+        })
         progressBar.style.width = "0%"; 
         progressBar.textContent = "0%";
     });
 
     function updateTime() {
-        chrome.storage.local.get(["timer", "isRunning", "initialTimerValue"], data => {
+        chrome.storage.local.get(["timer", "isRunning", "workOption", "breakOption", "toggleSwitch"], data => {
             if (data.isRunning){
-                const minutes = data.initialTimerValue - Math.ceil(data.timer / 60); 
+                value = data.toggleSwitch ? data.breakOption : data.workOption;
+                const minutes = value - Math.ceil(data.timer / 60); 
                 let seconds = 0;
                 if (data.timer % 60 === 0) {
                     seconds = 0;
@@ -167,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     seconds = 60 - Math.ceil(data.timer % 60);
                 }
                 timerDisplay.textContent = `${minutes < 10 ? "0"+ minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-                const percentage = (data.timer / (data.initialTimerValue * 60)) * 100;
+                const percentage = (data.timer / (value * 60)) * 100;
                 progressBar.style.width = `${percentage}%`;
                 progressBar.textContent = `${Math.round(percentage)}%`;
             }

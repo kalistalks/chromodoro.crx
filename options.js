@@ -8,7 +8,7 @@ workOption.addEventListener("change", (event) => {
 
 const workButton = document.getElementById("work-button");  
 workButton.addEventListener("click", () => {
-    chrome.local.storage.set({
+    chrome.storage.local.set({
         timer: 0,
         workOption: workOption.value,
         isRunning: false,
@@ -24,12 +24,15 @@ breakOption.addEventListener("change", (event) => {
 })
 
 const breakButton = document.getElementById("break-button");  
-workButton.addEventListener("click", () => {
-    chrome.local.storage.set({
+breakButton.addEventListener("click", () => {
+    chrome.storage.local.set({
         timer: 0,
         breakOption: breakOption.value,
         isRunning: false,
     })
 });
 
-chrome.storage.local.get()
+chrome.storage.local.get(["workOption", "breakOption"], (result) => {
+    workOption.value = result.workOption || 25;
+    breakOption.value = result.breakOption || 5;
+});
