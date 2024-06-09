@@ -45,9 +45,9 @@ git clone https://github.com/kalistalks/Pomodoro-Chrome-Extension.git
 4. Customize settings:
     - Adjust the timer settings in the options page according to your preferences.  
 
-### Possible future developments
+### Future improvements
 - Notification reminders for upcoming tasks and breaks.
-- Website white or blacklists
+- Ability to white or blacklist websites to improve productivity.
 - Dark mode theme option.
 
 ### License
