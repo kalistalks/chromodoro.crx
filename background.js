@@ -1,3 +1,11 @@
+/*
+background.js
+
+Handles the initial setup and configuration for the Pomodoro Timer Chrome extension.
+This script primarily deals with setting default values and handling user interactions 
+on the options page for work and break durations.
+*/
+
 chrome.alarms.create("pomodoroTimer", {
   periodInMinutes: 1 / 60, 
 })

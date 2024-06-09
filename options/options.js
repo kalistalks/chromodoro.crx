@@ -1,3 +1,10 @@
+/*
+options.js
+
+Manages user settings for the Pomodoro Timer Chrome extension. This script allows users
+to set their preferred work and break durations, and saves these preferences to local storage.
+*/
+
 const workOption = document.getElementById("work-option");
 workOption.addEventListener("change", (event) => {
     const value = event.target.value;

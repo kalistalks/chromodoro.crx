@@ -1,3 +1,11 @@
+/*
+popup.js
+ 
+Handles the interactions within the popup window of the Pomodoro Timer Chrome extension.
+This script manages the timer display, task list, and user input, and keeps the popup UI
+synchronized with the extension's state.
+*/
+
 document.addEventListener("DOMContentLoaded", function() {
 
     const toggleSwitch = document.getElementById("toggle-switch");
@@ -41,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     inputButton.addEventListener("click", () => addTask());
 
+    // Loads tasks from local storage and displays them.    
     function loadTasks() {
         chrome.storage.local.get("tasks", data => {
             if (data.tasks) {
@@ -54,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     loadTasks();
 
+    // Updates the task completion counters.
     function updateCounter() {
         const completedTasks = listContainer.querySelectorAll("li.completed").length;
         const uncompletedTasks = listContainer.querySelectorAll("li:not(.completed)").length;
@@ -61,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
         uncompletedCounter.textContent = uncompletedTasks;
     }
 
+    // Saves the tasks to local storage.
     function saveTasks() {
         const tasks = [];
         listContainer.querySelectorAll("li").forEach(li => {
@@ -160,6 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
         progressBar.textContent = "0%";
     });
 
+    // Updates the timer and progress bar based on the current state.
     function updateTime() {
         chrome.storage.local.get(["timer", "isRunning", "workOption", "breakOption", "toggleSwitch"], data => {
             if (data.isRunning){
