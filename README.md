@@ -16,8 +16,8 @@ This Chrome extension combines a Pomodoro timer with a to-do list to help you bo
   
 ## Screenshots
 <div class="d-flex justify-content-center align-items-center" style="width: 100%; justify-content: space-between;">
-    <img src="/screenshots/popup%20unused.png" alt="popup" style="width: 30%; height: auto;"/> 
     <img src="/screenshots/popup%20used.png" alt="popup" style="width: 30%; height: auto;"/> 
+    <img src="/screenshots/popup%20unused.png" alt="popup" style="width: 30%; height: auto;"/> 
     <img src="/screenshots/options%20page.png" alt="options" style="width: 30%; height: auto;"/> 
 </div>
 
