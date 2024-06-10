@@ -15,9 +15,9 @@ This Chrome extension combines a Pomodoro timer with a to-do list to help you bo
     - Persistent storage to keep your tasks saved between sessions.
   
 ## Screenshots
-![](https://github.com/kalistalks/pomodoro.crx/assets/62800848/a673e002-2dc1-484f-96b3-d2c737d0d282)
-![image](https://github.com/kalistalks/pomodoro.crx/assets/62800848/ef4728f1-ce3f-4d49-b489-6ec3ae93f77d)
-![image](https://github.com/kalistalks/pomodoro.crx/assets/62800848/00c18f25-9c46-4d90-ae95-bc18d5df020b)
+![image](/screenshots/popup%20used.png)
+![image](/screenshots/popup%20unused.png)
+![image](/screenshots/options%20page.png)
 
 ## Installation
 1. Clone the repository:
