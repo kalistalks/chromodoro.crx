@@ -15,10 +15,10 @@ This Chrome extension combines a Pomodoro timer with a to-do list to help you bo
     - Persistent storage to keep your tasks saved between sessions.
   
 ## Screenshots
-<div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-    <img src="/screenshots/popup%20unused.png" alt="popup" style="flex-grow: 1; max-width: 30%; height: auto; margin-right: 10px;" /> 
-    <img src="/screenshots/popup%20used.png" alt="popup" style="flex-grow: 1; max-width: 30%; height: auto; margin-right: 10px;" /> 
-    <img src="/screenshots/options%20page.png" alt="options" style="flex-grow: 1; max-width: 30%; height: auto;" /> 
+<div class="d-flex justify-content-center align-items-center" style="width: 100%; justify-content: space-between;">
+    <img src="/screenshots/popup%20unused.png" alt="popup" style="width: 30%; height: auto;"/> 
+    <img src="/screenshots/popup%20used.png" alt="popup" style="width: 30%; height: auto;"/> 
+    <img src="/screenshots/options%20page.png" alt="options" style="width: 30%; height: auto;"/> 
 </div>
 
 ## Installation
