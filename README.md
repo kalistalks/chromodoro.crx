@@ -1,4 +1,4 @@
-# Pomodoro Timer Chrome Extension
+# Chromodoro — a Pomodoro Timer Chrome Extension
 
 ## Overview
 This Chrome extension combines a Pomodoro timer with a to-do list to help you boost productivity. Manage your tasks and track your work intervals efficiently right from your browser.
